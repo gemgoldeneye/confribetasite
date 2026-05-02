@@ -2,19 +2,34 @@
 const benefits = [
   {
     icon: `<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`,
+    accent: "cyan",
     eyebrow: "Early access",
     title: "Enjoy the early version of ConvoyFriends",
     body: "Get hands-on with a build months before public launch. Your feedback shapes the features that ship. VIP members set the direction — not the roadmap.",
     bullets: ["Direct line to the team", "Feature requests get priority review", "Access to every beta build, forever"],
   },
   {
-    icon: `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
-    eyebrow: "👑 VIP community",
+    icon: `<path d="M3 18h18M5 16l-2-8 5 3 4-7 4 7 5-3-2 8H5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`,
+    accent: "gold",
+    eyebrow: "VIP community",
     title: "Be part of the VIP group",
     body: "A private Discord for VIP members. Monthly virtual meetups, real-road convoy sessions, and a VIP badge that never goes away.",
     bullets: ["VIP badge in-app", "Private Discord — invite only", "Monthly convoy meetups"],
   },
 ];
+
+const iconStyles = {
+  cyan: {
+    box: "background: color-mix(in srgb, var(--color-cyan) 12%, transparent); border: 1px solid var(--color-line-accent);",
+    svg: "text-cyan",
+    eyebrow: "text-cyan",
+  },
+  gold: {
+    box: "background: color-mix(in srgb, #F2B26B 12%, transparent); border: 1px solid color-mix(in srgb, #F2B26B 35%, transparent);",
+    svg: "",
+    eyebrow: "",
+  },
+};
 ---
 
 <section class="py-20">
@@ -33,35 +48,51 @@ const benefits = [
 
     <!-- Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-      {benefits.map((b, i) => (
-        <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated p-8 overflow-hidden transition-shadow duration-base ease-standard hover:shadow-hover">
-          <!-- Top gradient accent line -->
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
+      {benefits.map((b) => {
+        const style = iconStyles[b.accent as keyof typeof iconStyles];
+        return (
+          <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated p-8 overflow-hidden transition-shadow duration-base ease-standard hover:shadow-hover">
+            <!-- Top gradient accent line -->
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
 
-          <!-- Icon -->
-          <div
-            class="w-11 h-11 rounded-md mb-5 grid place-items-center"
-            style="background: color-mix(in srgb, var(--color-cyan) 12%, transparent); border: 1px solid var(--color-line-accent);"
-          >
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" class="text-cyan" aria-hidden="true">
-              <Fragment set:html={b.icon} />
-            </svg>
+            <!-- Icon box -->
+            <div
+              class="w-11 h-11 rounded-md mb-5 grid place-items-center"
+              style={style.box}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                class={style.svg}
+                style={b.accent === "gold" ? "color: #F2B26B" : ""}
+                aria-hidden="true"
+              >
+                <Fragment set:html={b.icon} />
+              </svg>
+            </div>
+
+            <p
+              class={`font-display font-bold text-caption tracking-[0.1em] uppercase mb-2 ${style.eyebrow}`}
+              style={b.accent === "gold" ? "color: #F2B26B" : ""}
+            >
+              {b.eyebrow}
+            </p>
+            <h3 class="font-display font-bold text-h3 tracking-tight mb-3">{b.title}</h3>
+            <p class="text-body text-ink-mute leading-relaxed mb-5">{b.body}</p>
+
+            <ul class="space-y-2">
+              {b.bullets.map((bullet) => (
+                <li class="flex items-center gap-3 text-small text-ink-mute">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal flex-shrink-0" aria-hidden="true"></span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <p class="font-display font-bold text-caption tracking-[0.1em] uppercase text-cyan mb-2">{b.eyebrow}</p>
-          <h3 class="font-display font-bold text-h3 tracking-tight mb-3">{b.title}</h3>
-          <p class="text-body text-ink-mute leading-relaxed mb-5">{b.body}</p>
-
-          <ul class="space-y-2">
-            {b.bullets.map((bullet) => (
-              <li class="flex items-center gap-3 text-small text-ink-mute">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal flex-shrink-0" aria-hidden="true"></span>
-                {bullet}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>
