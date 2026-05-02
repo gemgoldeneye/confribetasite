@@ -57,6 +57,10 @@ coverage/
 # Storybook
 storybook-static/
 
+# Loki — commit reference/, ignore transient artefacts
+.loki/current/
+.loki/difference/
+
 # Misc
 .cache/
 tmp/
