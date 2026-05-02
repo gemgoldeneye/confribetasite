@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "ConvoyFriends",
+    "slug": "convoyfriends",
+    "version": "1.0.0",
+    "scheme": "convoyfriends",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "app.convoyfriends",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "app.convoyfriends",
+      "adaptiveIcon": {
+        "backgroundColor": "#050B16"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#050B16"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
