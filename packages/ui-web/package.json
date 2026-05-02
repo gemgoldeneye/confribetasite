@@ -1,0 +1,53 @@
+{
+  "name": "@confri/ui-web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ConvoyFriends web UI primitives + Tailwind v4 theme. Consumes @confri/tokens.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tailwind": "./tailwind.css",
+    "./tailwind.css": "./tailwind.css"
+  },
+  "files": [
+    "dist",
+    "src",
+    "tailwind.css"
+  ],
+  "scripts": {
+    "build": "pnpm build:theme && pnpm build:lib",
+    "build:theme": "tsx scripts/build-theme.ts",
+    "build:lib": "vite build",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist tailwind.css"
+  },
+  "dependencies": {
+    "@confri/tokens": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "tailwindcss": ">=4"
+  },
+  "devDependencies": {
+    "@storybook/react": "^8.6.18",
+    "@storybook/test": "^8.6.15",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.0",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0"
+  }
+}

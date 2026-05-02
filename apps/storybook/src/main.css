@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+@import "tailwindcss";
+@import "@confri/ui-web/tailwind";
+
+/* Tell Tailwind v4 where to scan for utility usage. */
+@source "../../../packages/ui-web/src/**/*.{ts,tsx}";
+
+/* Global base styles for stories — minimal reset, brand-coherent. */
+html,
+body,
+#storybook-root {
+  background-color: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* The Storybook root wrapper — center stories nicely on the night ground. */
+#storybook-root {
+  min-height: 100vh;
+  padding: 32px;
+}

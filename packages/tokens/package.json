@@ -1,0 +1,54 @@
+{
+  "name": "@confri/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ConvoyFriends design tokens — single source of truth for both web and mobile.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./colors": {
+      "types": "./dist/colors.d.ts",
+      "import": "./dist/colors.js"
+    },
+    "./gradients": {
+      "types": "./dist/gradients.d.ts",
+      "import": "./dist/gradients.js"
+    },
+    "./typography": {
+      "types": "./dist/typography.d.ts",
+      "import": "./dist/typography.js"
+    },
+    "./radii": {
+      "types": "./dist/radii.d.ts",
+      "import": "./dist/radii.js"
+    },
+    "./spacing": {
+      "types": "./dist/spacing.d.ts",
+      "import": "./dist/spacing.js"
+    },
+    "./motion": {
+      "types": "./dist/motion.d.ts",
+      "import": "./dist/motion.js"
+    },
+    "./elevation": {
+      "types": "./dist/elevation.d.ts",
+      "import": "./dist/elevation.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  }
+}
