@@ -130,7 +130,7 @@ export const GET: APIRoute = async () => {
             borderRadius: "50%",
             backgroundColor: TEAL,
           }),
-          el("span", { color: INK_MUTE, fontSize: "15px" }, "Beta · 300 founding drivers"),
+          el("span", { color: INK_MUTE, fontSize: "15px" }, "Beta · VIP Group"),
         ),
       ),
       // Tagline

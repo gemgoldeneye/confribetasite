@@ -79,7 +79,7 @@ export default function WelcomeScreen() {
             className="text-ink-soft text-center text-small"
             style={{ fontFamily: "Inter-Regular" }}
           >
-            One of 300 founding drivers? Welcome back.
+            Already in the VIP group? Welcome back.
           </Text>
         </View>
       </View>
