@@ -78,20 +78,20 @@ function renderDashboard(rows: Application[]) {
 
   const tableRows = rows.map((r) => `
     <tr>
-      <td class="mono mute">${esc(r.reference_id)}</td>
-      <td><strong>${esc(r.name)}</strong></td>
-      <td class="mute">${esc(r.email)}</td>
-      <td class="mute">${esc(r.phone || "—")}</td>
-      <td class="mute">${esc(r.location || "—")}</td>
-      <td>${(DEVICE_LABEL[r.device] ?? esc(r.device)) || "—"}</td>
-      <td>${vehicleEmoji(r.vehicle)} ${(VEHICLE_LABEL[r.vehicle] ?? esc(r.vehicle)) || "—"}</td>
-      <td class="dream mute">${esc(r.dream || "—")}</td>
-      <td class="mute small">${fmtDate(r.submitted_at)}</td>
+      <td><span class="badge">${esc(r.reference_id)}</span></td>
+      <td class="name">${esc(r.name)}</td>
+      <td class="secondary">${esc(r.email)}</td>
+      <td class="secondary">${esc(r.phone || "—")}</td>
+      <td class="secondary">${esc(r.location || "—")}</td>
+      <td><span class="chip">${(DEVICE_LABEL[r.device] ?? esc(r.device)) || "—"}</span></td>
+      <td>${vehicleEmoji(r.vehicle)} <span class="secondary">${(VEHICLE_LABEL[r.vehicle] ?? esc(r.vehicle)) || "—"}</span></td>
+      <td class="dream secondary">${esc(r.dream || "—")}</td>
+      <td class="date secondary">${fmtDate(r.submitted_at)}</td>
     </tr>`).join("");
 
   const emptyState = `
     <tr>
-      <td colspan="9" class="empty">No applications yet. Share the site to get your first beta sign-ups.</td>
+      <td colspan="9" class="empty">No sign-ups yet — share the beta site to get your first applicants.</td>
     </tr>`;
 
   return `<!doctype html>
@@ -99,69 +99,122 @@ function renderDashboard(rows: Application[]) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>ConvoyFriends — Beta Dashboard</title>
+  <title>Beta Sign-ups — Admin</title>
   <meta http-equiv="refresh" content="30"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:      #050B16;
-      --surface: #0A1628;
-      --elevated:#0F1E36;
-      --cyan:    #3DD9F5;
-      --teal:    #2BC4A8;
-      --amber:   #F2B26B;
-      --ink:     #F5F8FF;
-      --mute:    #9AA8C2;
-      --soft:    #6B7891;
-      --line:    rgba(255,255,255,0.08);
-      --line-strong: rgba(255,255,255,0.14);
+    body {
+      background: #f5f6f8;
+      color: #111827;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      min-height: 100vh;
     }
-    body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, sans-serif; font-size: 14px; min-height: 100vh; }
 
-    /* ── Header ── */
-    header { background: var(--surface); border-bottom: 1px solid var(--line-strong); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .brand-mark { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--cyan), var(--teal)); display: grid; place-items: center; font-size: 16px; }
-    .brand-name { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
-    .brand-name span { color: var(--mute); font-weight: 400; margin-left: 6px; font-size: 13px; }
-    .refresh-note { font-size: 12px; color: var(--soft); }
+    /* Header */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-left { display: flex; align-items: center; gap: 10px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex-shrink: 0; }
+    .title { font-size: 14px; font-weight: 600; color: #111827; }
+    .subtitle { font-size: 13px; color: #9ca3af; margin-left: 4px; font-weight: 400; }
+    .refresh { font-size: 12px; color: #9ca3af; }
 
-    /* ── Layout ── */
-    main { max-width: 1280px; margin: 0 auto; padding: 32px 32px 64px; }
+    /* Layout */
+    main { max-width: 1400px; margin: 0 auto; padding: 28px 32px 64px; }
 
-    /* ── Stats ── */
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
-    .stat { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 20px 24px; }
-    .stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-bottom: 8px; }
-    .stat-value { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
-    .stat-value.cyan { color: var(--cyan); }
-    .stat-value.teal { color: var(--teal); }
-    .stat-value.amber { color: var(--amber); }
-    .stat-sub { font-size: 12px; color: var(--soft); margin-top: 6px; }
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 18px 22px;
+    }
+    .stat-label { font-size: 11px; font-weight: 500; color: #6b7280; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .stat-value { font-size: 30px; font-weight: 700; color: #111827; letter-spacing: -0.02em; line-height: 1; }
+    .stat-sub { font-size: 12px; color: #9ca3af; margin-top: 5px; }
 
-    /* ── Section header ── */
-    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .section-title { font-size: 13px; font-weight: 600; color: var(--mute); text-transform: uppercase; letter-spacing: 0.06em; }
-    .export-btn { background: var(--elevated); border: 1px solid var(--line-strong); color: var(--mute); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 6px; cursor: pointer; text-decoration: none; transition: color 0.15s; }
-    .export-btn:hover { color: var(--ink); }
+    /* Table header row */
+    .table-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .table-label { font-size: 13px; font-weight: 600; color: #374151; }
+    .export {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .export:hover { background: #f9fafb; }
 
-    /* ── Table ── */
-    .table-wrap { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 16px; overflow: hidden; overflow-x: auto; }
+    /* Table */
+    .table-wrap {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
     table { width: 100%; border-collapse: collapse; }
-    thead th { background: var(--elevated); padding: 12px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--soft); border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
-    tbody tr { border-bottom: 1px solid var(--line); transition: background 0.1s; }
+    thead th {
+      background: #f9fafb;
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #6b7280;
+      border-bottom: 1px solid #e5e7eb;
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid #f3f4f6; transition: background 0.1s; }
     tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: rgba(255,255,255,0.025); }
-    td { padding: 13px 16px; vertical-align: middle; white-space: nowrap; }
-    td.dream { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    td.mono { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.04em; }
-    td.small { font-size: 12px; }
-    td.mute { color: var(--mute); }
-    td strong { color: var(--ink); font-weight: 600; }
-    td.empty { text-align: center; color: var(--soft); padding: 48px 16px; font-size: 14px; }
+    tbody tr:hover { background: #f9fafb; }
+    td { padding: 12px 16px; vertical-align: middle; white-space: nowrap; color: #374151; }
+    td.name { font-weight: 600; color: #111827; }
+    td.secondary { color: #6b7280; }
+    td.dream { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #6b7280; }
+    td.date { font-size: 12px; color: #9ca3af; }
+    td.empty { text-align: center; color: #9ca3af; padding: 56px 16px; }
+    .badge {
+      display: inline-block;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #6b7280;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      color: #374151;
+      background: #f3f4f6;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
       main { padding: 20px 16px 48px; }
       header { padding: 0 16px; }
     }
@@ -169,40 +222,41 @@ function renderDashboard(rows: Application[]) {
 </head>
 <body>
   <header>
-    <div class="brand">
-      <div class="brand-mark">👑</div>
-      <span class="brand-name">ConvoyFriends <span>Beta Dashboard</span></span>
+    <div class="header-left">
+      <div class="dot"></div>
+      <span class="title">Beta Sign-ups</span>
+      <span class="subtitle">ConvoyFriends Admin</span>
     </div>
-    <span class="refresh-note">Auto-refreshes every 30s</span>
+    <span class="refresh">Auto-refreshes every 30s</span>
   </header>
 
   <main>
     <div class="stats">
       <div class="stat">
-        <div class="stat-label">Total applications</div>
-        <div class="stat-value cyan">${total}</div>
+        <div class="stat-label">Total</div>
+        <div class="stat-value">${total}</div>
         <div class="stat-sub">All time</div>
       </div>
       <div class="stat">
         <div class="stat-label">This week</div>
-        <div class="stat-value teal">${weekCount}</div>
+        <div class="stat-value">${weekCount}</div>
         <div class="stat-sub">Last 7 days</div>
       </div>
       <div class="stat">
         <div class="stat-label">Today</div>
         <div class="stat-value">${todayCount}</div>
-        <div class="stat-sub">${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric" })}</div>
+        <div class="stat-sub">${new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" })}</div>
       </div>
       <div class="stat">
         <div class="stat-label">Top vehicle</div>
-        <div class="stat-value amber">${topVehicle ? vehicleEmoji(topVehicle[0]) : "—"}</div>
-        <div class="stat-sub">${topVehicle ? `${VEHICLE_LABEL[topVehicle[0]] ?? topVehicle[0]} · ${topVehicle[1]} applicant${topVehicle[1] !== 1 ? "s" : ""}` : "No data yet"}</div>
+        <div class="stat-value">${topVehicle ? vehicleEmoji(topVehicle[0]) : "—"}</div>
+        <div class="stat-sub">${topVehicle ? `${VEHICLE_LABEL[topVehicle[0]] ?? topVehicle[0]} (${topVehicle[1]})` : "No data yet"}</div>
       </div>
     </div>
 
-    <div class="section-header">
-      <span class="section-title">Applications (${total})</span>
-      <a href="/api/export" class="export-btn" download="applications.csv">Export CSV</a>
+    <div class="table-header">
+      <span class="table-label">${total} application${total !== 1 ? "s" : ""}</span>
+      <a href="/api/export" class="export" download="applications.csv">↓ Export CSV</a>
     </div>
 
     <div class="table-wrap">
