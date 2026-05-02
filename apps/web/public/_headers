@@ -1,0 +1,19 @@
+# Astro-fingerprinted assets — immutable forever
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# OG image — refresh daily
+/og.png
+  Cache-Control: public, max-age=86400
+
+# PWA manifest
+/site.webmanifest
+  Cache-Control: public, max-age=3600
+  Content-Type: application/manifest+json; charset=utf-8
+
+# HTML — always revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

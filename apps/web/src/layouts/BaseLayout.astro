@@ -89,6 +89,15 @@ const jsonLd = {
 
     <!-- Structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Analytics (production only) -->
+    {import.meta.env.PROD && (
+      <script
+        defer
+        data-domain="convoyfriends.app"
+        src="https://plausible.io/js/script.js"
+      />
+    )}
   </head>
   <body class="font-body antialiased">
     <slot />
