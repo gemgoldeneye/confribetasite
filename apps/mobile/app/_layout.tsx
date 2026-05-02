@@ -49,6 +49,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(onboarding)" options={{ animation: "fade" }} />
+        <Stack.Screen name="(convoy-flow)" options={{ presentation: "transparentModal", animation: "slide_from_bottom" }} />
       </Stack>
     </>
   );
