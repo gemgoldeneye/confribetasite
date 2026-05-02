@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Hero from "../components/Hero.astro";
+import Benefits from "../components/Benefits.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ApplicationForm from "../components/ApplicationForm.tsx";
+---
+
+<BaseLayout>
+  <SiteHeader />
+
+  <main>
+    <Hero />
+    <Benefits />
+    <HowItWorks />
+
+    <!-- Application form section -->
+    <section id="apply" class="py-20">
+      <div class="mx-auto max-w-2xl px-6">
+        <!-- Header -->
+        <div class="mb-10 text-center">
+          <span class="inline-flex items-center gap-2 mb-4">
+            <span class="w-6 h-px bg-cyan"></span>
+            <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">Limited spots</span>
+            <span class="w-6 h-px bg-cyan"></span>
+          </span>
+          <h2 class="font-display font-bold text-[clamp(26px,3vw,38px)] tracking-tight mb-3">
+            Apply for beta access
+          </h2>
+          <p class="text-lede text-ink-mute">
+            300 founding driver spots. No waitlist — we review every application personally.
+          </p>
+        </div>
+
+        <!-- Card wrapping the React island -->
+        <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated overflow-hidden p-8">
+          <!-- Gradient top accent -->
+          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
+
+          <ApplicationForm client:visible />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

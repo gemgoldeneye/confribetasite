@@ -1,0 +1,46 @@
+---
+const links = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<footer class="border-t border-line-subtle">
+  <div class="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <!-- Brand -->
+    <div class="flex items-center gap-3">
+      <span
+        class="w-8 h-8 rounded-sm bg-gradient-brand grid place-items-center shadow-brand-mark flex-shrink-0"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true">
+          <circle cx="5" cy="12" r="2.4" fill="var(--color-ink-on-accent)" />
+          <circle cx="12" cy="6" r="2.4" fill="var(--color-ink-on-accent)" />
+          <circle cx="19" cy="12" r="2.4" fill="var(--color-ink-on-accent)" />
+          <path d="M6.5 11 10.5 7M13.5 7l4 4M6.5 13l11 0" stroke="var(--color-ink-on-accent)" stroke-width="1.6" stroke-linecap="round" />
+        </svg>
+      </span>
+      <span class="font-display font-semibold text-small">
+        <span class="text-ink">Convoy</span><span class="bg-gradient-brand bg-clip-text text-transparent">Friends</span>
+      </span>
+    </div>
+
+    <!-- Tagline -->
+    <p class="text-small text-ink-soft text-center">
+      Drive together, navigate smarter. · © {new Date().getFullYear()} ConvoyFriends
+    </p>
+
+    <!-- Nav -->
+    <nav class="flex items-center gap-5" aria-label="Footer">
+      {links.map((l) => (
+        <a
+          href={l.href}
+          class="text-small text-ink-soft transition-colors duration-fast ease-standard hover:text-ink"
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</footer>

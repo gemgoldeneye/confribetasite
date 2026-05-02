@@ -65,3 +65,5 @@ storybook-static/
 .cache/
 tmp/
 temp/
+apps/web/dist/
+apps/web/.astro/

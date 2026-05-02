@@ -1,0 +1,165 @@
+---
+---
+
+<!--
+  MotionPhone — SVG phone bezel with an animated convoy map inside.
+  Three markers travel a curved road path using SMIL animateMotion.
+  prefers-reduced-motion: the inline script pauses all SVG animations.
+-->
+
+<div class="motion-phone relative mx-auto w-[260px] select-none" aria-hidden="true">
+  <!-- Ambient glow behind the phone -->
+  <div
+    class="absolute -inset-8 rounded-full blur-3xl opacity-30 bg-gradient-brand pointer-events-none"
+    style="border-radius: 50%;"
+  ></div>
+
+  <svg
+    id="motion-phone-svg"
+    viewBox="0 0 260 520"
+    width="260"
+    height="520"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Animated convoy map preview showing three vehicles moving in formation"
+  >
+    <defs>
+      <!-- Screen clip -->
+      <clipPath id="screen">
+        <rect x="10" y="46" width="240" height="432" rx="26" />
+      </clipPath>
+      <!-- Marker glow filter -->
+      <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" result="blur" />
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <!-- Road path (used by animateMotion) -->
+      <path id="road-path" d="M 220 480 Q 200 380, 130 300 Q 60 220, 80 80" />
+    </defs>
+
+    <!-- Phone bezel -->
+    <rect x="2" y="2" width="256" height="516" rx="38"
+      fill="var(--color-surface)"
+      stroke="var(--color-line-strong)"
+      stroke-width="1.5"
+    />
+
+    <!-- Side button detail -->
+    <rect x="258" y="140" width="4" height="44" rx="2" fill="var(--color-line-strong)" />
+    <rect x="258" y="196" width="4" height="28" rx="2" fill="var(--color-line-strong)" />
+    <rect x="-2" y="160" width="4" height="32" rx="2" fill="var(--color-line-strong)" />
+
+    <!-- Screen content -->
+    <g clip-path="url(#screen)">
+      <!-- Map base -->
+      <rect x="10" y="46" width="240" height="432" fill="var(--color-ground)" />
+
+      <!-- Faint grid (stylized map tiles) -->
+      <line x1="70" y1="46" x2="70" y2="478" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+      <line x1="130" y1="46" x2="130" y2="478" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+      <line x1="190" y1="46" x2="190" y2="478" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+      <line x1="10" y1="160" x2="250" y2="160" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+      <line x1="10" y1="280" x2="250" y2="280" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+      <line x1="10" y1="380" x2="250" y2="380" stroke="var(--color-line-subtle)" stroke-width="0.5" />
+
+      <!-- Road: wide glow band -->
+      <use
+        href="#road-path"
+        stroke="color-mix(in srgb, var(--color-cyan) 12%, transparent)"
+        stroke-width="22"
+        fill="none"
+        stroke-linecap="round"
+      />
+      <!-- Road: center line (dashed) -->
+      <use
+        href="#road-path"
+        stroke="color-mix(in srgb, var(--color-cyan) 28%, transparent)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-dasharray="10 8"
+      />
+
+      <!-- Marker 1 — Lead driver (cyan) -->
+      <g id="mk1" filter="url(#glow-cyan)">
+        <circle r="10" fill="color-mix(in srgb, var(--color-cyan) 20%, transparent)" />
+        <circle r="5.5" fill="var(--color-cyan)" />
+        <animateMotion dur="9s" repeatCount="indefinite" calcMode="spline"
+          keyPoints="0;1" keyTimes="0;1"
+          keySplines="0.2 0 0.8 1">
+          <mpath href="#road-path" />
+        </animateMotion>
+      </g>
+
+      <!-- Marker 2 — Second driver (teal), ~1.5s behind -->
+      <g id="mk2">
+        <circle r="8" fill="color-mix(in srgb, var(--color-teal) 20%, transparent)" />
+        <circle r="4.5" fill="var(--color-teal)" />
+        <animateMotion dur="9s" begin="1.5s" repeatCount="indefinite" calcMode="spline"
+          keyPoints="0;1" keyTimes="0;1"
+          keySplines="0.2 0 0.8 1">
+          <mpath href="#road-path" />
+        </animateMotion>
+      </g>
+
+      <!-- Marker 3 — Third driver (muted), ~3s behind -->
+      <g id="mk3">
+        <circle r="7" fill="color-mix(in srgb, var(--color-ink-mute) 20%, transparent)" />
+        <circle r="4" fill="var(--color-ink-mute)" />
+        <animateMotion dur="9s" begin="3s" repeatCount="indefinite" calcMode="spline"
+          keyPoints="0;1" keyTimes="0;1"
+          keySplines="0.2 0 0.8 1">
+          <mpath href="#road-path" />
+        </animateMotion>
+      </g>
+
+      <!-- HUD — convoy badge (top-left) -->
+      <rect x="18" y="56" width="144" height="28" rx="8"
+        fill="color-mix(in srgb, var(--color-surface) 80%, transparent)"
+        stroke="var(--color-line-subtle)"
+        stroke-width="1"
+      />
+      <circle cx="32" cy="70" r="4" fill="var(--color-teal)" />
+      <text x="42" y="74.5" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--color-ink)" font-weight="500">CONVOY · 3 DRIVERS</text>
+
+      <!-- HUD — speed chip (top-right) -->
+      <rect x="172" y="56" width="70" height="28" rx="8"
+        fill="color-mix(in srgb, var(--color-surface) 80%, transparent)"
+        stroke="var(--color-line-subtle)"
+        stroke-width="1"
+      />
+      <text x="180" y="74.5" font-family="JetBrains Mono, monospace" font-size="11" fill="var(--color-ink)" font-weight="500">64 mph</text>
+
+      <!-- HUD — bottom action bar -->
+      <rect x="18" y="436" width="224" height="36" rx="10"
+        fill="color-mix(in srgb, var(--color-surface) 85%, transparent)"
+        stroke="var(--color-line-subtle)"
+        stroke-width="1"
+      />
+      <rect x="28" y="446" width="96" height="16" rx="6"
+        fill="color-mix(in srgb, var(--color-cyan) 15%, transparent)"
+        stroke="var(--color-line-accent)"
+        stroke-width="1"
+      />
+      <text x="76" y="458" font-family="Sora, sans-serif" font-size="9" fill="var(--color-cyan)" font-weight="700" text-anchor="middle">Pit Stop</text>
+      <rect x="134" y="446" width="96" height="16" rx="6"
+        fill="color-mix(in srgb, var(--color-line-subtle) 80%, transparent)"
+      />
+      <text x="182" y="458" font-family="Sora, sans-serif" font-size="9" fill="var(--color-ink-mute)" font-weight="600" text-anchor="middle">Voice · Off</text>
+    </g>
+
+    <!-- Dynamic island -->
+    <rect x="96" y="16" width="68" height="20" rx="10" fill="var(--color-ground)" />
+
+    <!-- Home indicator -->
+    <rect x="107" y="502" width="46" height="4" rx="2" fill="var(--color-line-strong)" />
+  </svg>
+</div>
+
+<script is:inline>
+  // Freeze SVG animations when the user prefers reduced motion.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const svg = document.getElementById("motion-phone-svg");
+    if (svg) svg.pauseAnimations();
+  }
+</script>

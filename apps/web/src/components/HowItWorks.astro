@@ -1,0 +1,66 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Apply",
+    body: "Fill in the short form below. Tell us about your vehicle and your dream convoy route.",
+  },
+  {
+    number: "02",
+    title: "Get matched",
+    body: "We review applications weekly and send personalised invites to founding drivers.",
+  },
+  {
+    number: "03",
+    title: "Install the build",
+    body: "You get a TestFlight or Play Internal link. Install in 60 seconds, sign in with a magic link.",
+  },
+  {
+    number: "04",
+    title: "Hit the road",
+    body: "Start a convoy, share the code with your crew, and drive together with live maps and voice.",
+  },
+];
+---
+
+<section id="how-it-works" class="py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <!-- Header -->
+    <div class="mb-14 text-center">
+      <span class="inline-flex items-center gap-2 mb-4">
+        <span class="w-6 h-px bg-cyan"></span>
+        <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">The process</span>
+        <span class="w-6 h-px bg-cyan"></span>
+      </span>
+      <h2 class="font-display font-bold text-[clamp(26px,3vw,38px)] tracking-tight">
+        How it works
+      </h2>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Connector line (desktop only) -->
+      <div
+        class="hidden lg:block absolute top-8 left-[12.5%] right-[12.5%] h-px"
+        style="background: linear-gradient(90deg, transparent, var(--color-line-subtle) 20%, var(--color-line-subtle) 80%, transparent);"
+        aria-hidden="true"
+      ></div>
+
+      {steps.map((step) => (
+        <div class="relative flex flex-col items-start sm:items-center text-left sm:text-center gap-4">
+          <!-- Step bubble -->
+          <div
+            class="w-14 h-14 rounded-xl flex-shrink-0 grid place-items-center font-mono font-medium text-small text-cyan z-10"
+            style="background: color-mix(in srgb, var(--color-cyan) 10%, transparent); border: 1px solid var(--color-line-accent);"
+          >
+            {step.number}
+          </div>
+          <div>
+            <h3 class="font-display font-bold text-h3 tracking-tight mb-1">{step.title}</h3>
+            <p class="text-small text-ink-mute leading-relaxed">{step.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

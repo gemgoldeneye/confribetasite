@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<BaseLayout title="Contact — ConvoyFriends" description="Get in touch with the ConvoyFriends team.">
+  <SiteHeader />
+  <main class="pt-28 pb-24">
+    <div class="mx-auto max-w-2xl px-6">
+      <h1 class="font-display font-extrabold text-h1 tracking-tight mb-4">Contact</h1>
+      <p class="text-lede text-ink-mute mb-8">Have a question or just want to say hi?</p>
+      <p class="text-body text-ink-mute leading-relaxed">
+        Email us at <a href="mailto:hello@convoyfriends.app" class="text-cyan hover:underline">hello@convoyfriends.app</a>.
+        We read every message.
+      </p>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

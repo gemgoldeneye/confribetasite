@@ -1,0 +1,78 @@
+---
+import MotionPhone from "./MotionPhone.astro";
+---
+
+<section class="relative pt-32 pb-24 overflow-hidden">
+  <!-- Background radial glows -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10"
+    style="background: radial-gradient(900px 500px at 10% -10%, color-mix(in srgb, var(--color-cyan) 14%, transparent), transparent 60%), radial-gradient(800px 600px at 110% 20%, color-mix(in srgb, var(--color-teal) 12%, transparent), transparent 55%);"
+    aria-hidden="true"
+  ></div>
+  <!-- Subtle grid overlay -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 opacity-40"
+    style="background-image: linear-gradient(var(--color-line-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--color-line-subtle) 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="mx-auto max-w-6xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+    <!-- Copy -->
+    <div class="flex flex-col items-start">
+      <!-- Eyebrow -->
+      <span class="inline-flex items-center gap-2 mb-6">
+        <span class="w-6 h-px bg-cyan"></span>
+        <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">
+          Beta Program Open · 300 Founding Drivers
+        </span>
+      </span>
+
+      <!-- Headline -->
+      <h1
+        class="font-display font-extrabold tracking-[-0.025em] leading-[1.05] text-[clamp(36px,4.4vw,56px)] mb-5 text-balance"
+      >
+        Drive Together,<br />
+        <span class="bg-gradient-brand bg-clip-text text-transparent">Navigate Smarter.</span>
+      </h1>
+
+      <!-- Subhead -->
+      <p class="text-lede text-ink-mute leading-relaxed max-w-xl mb-8">
+        The convoy app that keeps your group connected on road trips — live maps,
+        in-trip voice, smart re-routing when someone falls behind, synchronized
+        pit stops.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="#apply"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-gradient-brand text-ink-on-accent font-display font-bold text-body shadow-cta transition-[transform,filter] duration-fast ease-standard hover:-translate-y-0.5 hover:brightness-105"
+        >
+          <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Apply for Beta
+        </a>
+        <a
+          href="#how-it-works"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-line-strong text-ink font-display font-bold text-body transition-[background,border-color] duration-fast ease-standard hover:bg-glass-hover hover:border-line-accent"
+        >
+          How it works
+          <svg viewBox="0 0 20 20" width="14" height="14" fill="none" aria-hidden="true">
+            <path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Social proof -->
+      <p class="mt-8 text-small text-ink-soft">
+        Motorcycle riders, supercar owners, overlanding crews, RV convoys.
+      </p>
+    </div>
+
+    <!-- Phone mock -->
+    <div class="flex justify-center lg:justify-end lg:pr-4">
+      <MotionPhone />
+    </div>
+  </div>
+</section>
