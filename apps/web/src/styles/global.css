@@ -5,8 +5,44 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 ::selection {
   background: color-mix(in srgb, var(--color-cyan) 35%, transparent);
+}
+
+/* ─── Form field shake (invalid submit) ─────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  18%       { transform: translateX(-5px); }
+  36%       { transform: translateX(5px); }
+  54%       { transform: translateX(-3px); }
+  72%       { transform: translateX(2px); }
+  90%       { transform: translateX(-1px); }
+}
+
+@utility animate-shake {
+  animation: shake 360ms var(--ease-standard);
+}
+
+/* ─── Success / error message enter ─────────────────────────────────── */
+@keyframes fade-up-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-fade-up-in {
+  animation: fade-up-in var(--duration-slow) var(--ease-decelerate) both;
+}
+
+/* ─── Autofill override — dark mode brand surface ────────────────────── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset !important;
+  -webkit-text-fill-color: var(--color-ink) !important;
+  caret-color: var(--color-ink);
+  transition: background-color 5000s ease-in-out 0s;
 }
