@@ -21,9 +21,17 @@
       "expo-router",
       [
         "expo-splash-screen",
+        { "backgroundColor": "#050B16" }
+      ],
+      [
+        "expo-location",
         {
-          "backgroundColor": "#050B16"
+          "locationWhenInUsePermission": "ConvoyFriends shows your position on the convoy map so your group can see where you are."
         }
+      ],
+      [
+        "expo-notifications",
+        { "color": "#3DD9F5" }
       ]
     ],
     "experiments": {
