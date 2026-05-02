@@ -67,3 +67,4 @@ tmp/
 temp/
 apps/web/dist/
 apps/web/.astro/
+apps/dashboard/data/

@@ -14,34 +14,36 @@ export interface ApplicationResult {
   firstName: string;
 }
 
-// Phase F2 will swap this for a real API endpoint.
-// The form contract (ApplicationPayload) does not change.
+const DASHBOARD_URL = import.meta.env.PUBLIC_DASHBOARD_URL ?? "";
 const FORMSPREE_ENDPOINT = import.meta.env.PUBLIC_FORMSPREE_URL ?? "";
 
 export async function submitApplication(payload: ApplicationPayload): Promise<ApplicationResult> {
-  if (!FORMSPREE_ENDPOINT) {
-    // Dev stub: succeed immediately without a network call.
-    await new Promise((r) => setTimeout(r, 800));
-    return {
-      success: true,
-      referenceId: generateReferenceId(),
-      firstName: payload.name.split(" ")[0] ?? payload.name,
-    };
+  const referenceId = generateReferenceId();
+  const firstName = payload.name.split(" ")[0] ?? payload.name;
+
+  if (DASHBOARD_URL) {
+    const res = await fetch(`${DASHBOARD_URL}/api/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...payload, referenceId }),
+    });
+    if (!res.ok) throw new Error(`Dashboard submission failed: ${res.status}`);
+    return { success: true, referenceId, firstName };
   }
 
-  const res = await fetch(FORMSPREE_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(payload),
-  });
+  if (FORMSPREE_ENDPOINT) {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`Submission failed: ${res.status}`);
+    return { success: true, referenceId, firstName };
+  }
 
-  if (!res.ok) throw new Error(`Submission failed: ${res.status}`);
-
-  return {
-    success: true,
-    referenceId: generateReferenceId(),
-    firstName: payload.name.split(" ")[0] ?? payload.name,
-  };
+  // Dev stub — no endpoint configured.
+  await new Promise((r) => setTimeout(r, 800));
+  return { success: true, referenceId, firstName };
 }
 
 function generateReferenceId(): string {
