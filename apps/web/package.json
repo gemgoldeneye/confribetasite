@@ -13,10 +13,13 @@
     "@astrojs/react": "^4.0.0",
     "@confri/tokens": "workspace:*",
     "@confri/ui-web": "workspace:*",
+    "@fontsource/sora": "^5.2.8",
     "astro": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.0.0"
+    "react-hook-form": "^7.0.0",
+    "satori": "^0.26.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",

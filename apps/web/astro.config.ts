@@ -7,5 +7,11 @@ export default defineConfig({
   integrations: [react()],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        // sharp is a native Node.js addon — keep it external, resolve at runtime.
+        external: ["sharp"],
+      },
+    },
   },
 });
