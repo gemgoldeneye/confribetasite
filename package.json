@@ -19,6 +19,9 @@
     "apps/*",
     "packages/*"
   ],
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild", "sharp"]
+  },
   "devDependencies": {
     "@types/node": "^25.6.0",
     "tsx": "^4.21.0",
