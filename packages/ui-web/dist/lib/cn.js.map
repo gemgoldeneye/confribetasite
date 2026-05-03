@@ -1,0 +1,1 @@
+{"version":3,"file":"cn.js","sources":["../../src/lib/cn.ts"],"sourcesContent":["import { clsx, type ClassValue } from \"clsx\";\n\n/** Compose class names. Wraps `clsx` so consumers don't need to install it directly. */\nexport const cn = (...inputs: ClassValue[]) => clsx(inputs);\n"],"names":["cn","inputs","clsx"],"mappings":";AAGO,MAAMA,IAAK,IAAIC,MAAyBC,EAAKD,CAAM;"}

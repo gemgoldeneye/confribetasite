@@ -6,6 +6,10 @@ node_modules/
 dist/
 build/
 out/
+
+# Workspace package dist — committed so Vercel can deploy without rebuilding
+!packages/tokens/dist/
+!packages/ui-web/dist/
 .next/
 .expo/
 .turbo/
