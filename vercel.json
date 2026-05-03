@@ -1,6 +1,5 @@
 {
   "buildCommand": "pnpm --filter @confri/web build",
   "outputDirectory": "apps/web/dist",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "framework": "astro"
+  "installCommand": "corepack enable && pnpm install --frozen-lockfile"
 }
