@@ -1,5 +1,5 @@
 {
   "buildCommand": "pnpm --filter @confri/web build",
   "outputDirectory": "apps/web/dist",
-  "installCommand": "npm install -g pnpm@10.33.0 && pnpm install --frozen-lockfile"
+  "installCommand": "npm install -g pnpm@10.33.0 && pnpm install"
 }
