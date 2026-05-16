@@ -5,7 +5,6 @@ import Hero from "../components/Hero.astro";
 import Benefits from "../components/Benefits.astro";
 import HowItWorks from "../components/HowItWorks.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import ApplicationForm from "../components/ApplicationForm.tsx";
 ---
 
 <BaseLayout>
@@ -16,30 +15,140 @@ import ApplicationForm from "../components/ApplicationForm.tsx";
     <Benefits />
     <HowItWorks />
 
-    <!-- Application form section -->
+    <!-- Beta access section -->
     <section id="apply" class="py-20">
-      <div class="mx-auto max-w-2xl px-6">
-        <!-- Header -->
-        <div class="mb-10 text-center">
-          <span class="inline-flex items-center gap-2 mb-4">
-            <span class="w-6 h-px bg-cyan"></span>
-            <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">Limited spots</span>
-            <span class="w-6 h-px bg-cyan"></span>
-          </span>
-          <h2 class="font-display font-bold text-[clamp(26px,3vw,38px)] tracking-tight mb-3">
-            Apply for beta access
+      <div class="mx-auto max-w-5xl px-6">
+        <!-- Shared section header -->
+        <div class="mb-8 text-center">
+          <h2 class="font-display font-bold text-[clamp(26px,3vw,38px)] tracking-tight">
+            Get Beta Access Here
           </h2>
-          <p class="text-lede text-ink-mute">
-            VIP group spots. No waitlist — we review every application personally.
-          </p>
         </div>
 
-        <!-- Card wrapping the React island -->
-        <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated overflow-hidden p-8">
-          <!-- Gradient top accent -->
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
+        <!-- Cards grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- iOS Card -->
+          <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated overflow-hidden p-8">
+            <!-- Gradient top accent -->
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
 
-          <ApplicationForm client:visible />
+            <!-- In-card platform header -->
+            <div class="mb-6 text-center">
+              <span class="inline-flex items-center gap-2 mb-4">
+                <span class="w-6 h-px bg-cyan"></span>
+                <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">iOS beta · TestFlight</span>
+                <span class="w-6 h-px bg-cyan"></span>
+              </span>
+              <div class="flex justify-center" aria-label="Available on iOS via TestFlight">
+                <svg role="img" viewBox="0 0 24 24" width="44" height="44" fill="currentColor" class="text-ink" aria-hidden="true">
+                  <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display font-bold text-h3 tracking-tight mb-2">Join the ConvoyFriends Beta</h3>
+              <p class="text-body text-ink-mute">Be among the first to drive with us. Setup takes 2 minutes.</p>
+            </div>
+
+            <ol class="space-y-5 mb-8">
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">1</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Install TestFlight</p>
+                  <p class="text-small text-ink-mute">Download Apple's free TestFlight app from the App Store on your iPhone.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">2</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Tap "Join the Beta"</p>
+                  <p class="text-small text-ink-mute">The button below opens our beta page in TestFlight. Tap Accept, then Install.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">3</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Open ConvoyFriends</p>
+                  <p class="text-small text-ink-mute">Launch the app from your home screen, sign up, and allow location and microphone access to start testing.</p>
+                </div>
+              </li>
+            </ol>
+
+            <a
+              href="https://testflight.apple.com/join/q7BKUbMn"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex w-full items-center justify-center gap-2 px-6 py-3 rounded-md bg-gradient-brand text-ink-on-accent font-display font-bold text-body shadow-cta transition-[transform,filter] duration-fast ease-standard hover:-translate-y-0.5 hover:brightness-105"
+            >
+              Join the Beta
+              <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+                <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Android Card -->
+          <div class="relative rounded-xxl border border-line-subtle bg-gradient-surface-card-elevated overflow-hidden p-8">
+            <!-- Gradient top accent -->
+            <div class="absolute top-0 left-0 right-0 h-px bg-gradient-brand" aria-hidden="true"></div>
+
+            <!-- In-card platform header -->
+            <div class="mb-6 text-center">
+              <span class="inline-flex items-center gap-2 mb-4">
+                <span class="w-6 h-px bg-cyan"></span>
+                <span class="font-display font-bold text-caption tracking-[0.14em] uppercase text-cyan">Android beta · APK</span>
+                <span class="w-6 h-px bg-cyan"></span>
+              </span>
+              <div class="flex justify-center" aria-label="Available on Android via APK">
+                <svg role="img" viewBox="0 0 24 24" width="44" height="44" fill="currentColor" class="text-ink" aria-hidden="true">
+                  <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0223 3.503C15.5902 8.2439 13.8533 7.8508 12 7.8508s-3.5902.3931-5.1367 1.0989L4.841 5.4467a.4161.4161 0 00-.5677-.1521.4157.4157 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589 0 18.7611h24c-.3435-4.1022-2.6892-7.5744-6.1185-9.4397"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-display font-bold text-h3 tracking-tight mb-2">Join the ConvoyFriends Beta</h3>
+              <p class="text-body text-ink-mute">Be among the first to drive with us. Setup takes 2 minutes.</p>
+            </div>
+
+            <ol class="space-y-5 mb-8">
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">1</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Allow APK installs</p>
+                  <p class="text-small text-ink-mute">Open Settings → Security and allow installs from unknown sources for your browser.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">2</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Tap "Download APK"</p>
+                  <p class="text-small text-ink-mute">The button below downloads the APK to your phone. Open it from Downloads to install.</p>
+                </div>
+              </li>
+              <li class="flex gap-4">
+                <span class="shrink-0 inline-flex items-center justify-center w-8 h-8 rounded-full bg-glass-wash border border-line-subtle font-display font-bold text-small text-cyan">3</span>
+                <div>
+                  <p class="font-display font-bold text-body mb-1">Open ConvoyFriends</p>
+                  <p class="text-small text-ink-mute">Launch the app, sign up, and allow location and microphone access to start testing.</p>
+                </div>
+              </li>
+            </ol>
+
+            <a
+              href="https://expo.dev/artifacts/eas/mqYJTJQxZcfUPojcJZdXok.apk"
+              target="_blank"
+              rel="noopener"
+              download
+              class="inline-flex w-full items-center justify-center gap-2 px-6 py-3 rounded-md bg-gradient-brand text-ink-on-accent font-display font-bold text-body shadow-cta transition-[transform,filter] duration-fast ease-standard hover:-translate-y-0.5 hover:brightness-105"
+            >
+              Download APK
+              <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
+                <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </section>
